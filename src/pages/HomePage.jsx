@@ -13,14 +13,14 @@ export function HomePage() {
   const [showCards, setShowCards] = useState(true);
 
   const handleClick = () => {
-    setShowCards(false);
+    setShowCards(!showCards);
   }
 
   return (
     <>
       <AppBar />
       <Banner />
-      {showCards ? <ContentCards onClick={handleClick} /> : <ForumPost />}
+      {showCards ? <ContentCards onClick={handleClick} /> : <ForumPost onClick={handleClick} />}
       <Footer />
     </>
   );

@@ -6,6 +6,7 @@ export function ForumPost({
   author = "Placeholder Author",
   date = "Placeholder Date",
   photo = "Placeholder Photo URL",
+  onClick, 
 }) {
   return (
     <div className="bg-white shadow-lg rounded-lg max-w-[1200px] mx-auto">
@@ -26,6 +27,7 @@ export function ForumPost({
           <p className="text-gray-700 text-left">{content}</p>
         </div>
       </div>
+      <button  className="ml-auto px-4 py-2 border bg-main-color hover:bg-dark-color focus:border-main-color focus:outline-none m-1 text-xs font-medium leading-7 rounded-md cursor-pointer shadow-md min-w-16 tracking-widest uppercase" onClick={onClick}>Voltar</button>
     </div>
   );
 }
