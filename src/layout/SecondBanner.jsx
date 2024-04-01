@@ -70,7 +70,6 @@ export function SecondBanner({ imageUrl }) {
               height: "64.25px",
               display: "flex",
               alignItems: "center",
-              justifyContent: "center",
             }}
           >
             <span

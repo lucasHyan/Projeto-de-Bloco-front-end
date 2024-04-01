@@ -35,11 +35,18 @@ function ActionsDiv() {
       <IconButton>
         <div className="flex items-center space-x-3">
           <WebSiteLogo />
-          <span>AppBoilerplate</span>
+          <span>Fórum-2000</span>
         </div>
       </IconButton>
-      <ScrollButton className="opacity-70 flex" targetId="#">Acessar o Blog</ScrollButton>
-      <ScrollButton className="opacity-70 flex" targetId="#">Realizar Contato</ScrollButton>
+      <ScrollButton className="opacity-70 flex" targetId="#">
+        Trending
+      </ScrollButton>
+      <ScrollButton className="opacity-70 flex" targetId="#">
+        Novos
+      </ScrollButton>
+      <ScrollButton className="opacity-70 flex" targetId="#">
+        Categorias
+      </ScrollButton>
     </div>
   );
 }

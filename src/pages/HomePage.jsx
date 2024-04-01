@@ -13,9 +13,6 @@ export function HomePage() {
       <AppBar />
       <Banner />
       <ContentCards />
-      <SiteDescription />
-      <SecondBanner imageUrl="https://source.unsplash.com/random/369x273" />
-      <Form />
       <Footer />
     </>
   );
