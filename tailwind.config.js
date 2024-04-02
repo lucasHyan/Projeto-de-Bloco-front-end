@@ -4,8 +4,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        "main-color": "#FF9966",
-        "dark-color": "#CC7A52", 
+        "primary": "#8b58a7",
+        "secondary": "#3b274c",
+        "highlight": "#afd63b",
       },
       boxShadow: {
         custom:
