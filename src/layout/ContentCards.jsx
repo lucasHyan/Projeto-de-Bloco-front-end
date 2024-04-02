@@ -6,7 +6,7 @@ export function ContentCards({ onClick }) {
   return (
     <div className="w-full max-w-screen-lg mx-auto">
       <AboutText />
-      <div className="grid grid-cols-2 Small-At:grid-cols-3 gap-4 pt-0 w-full max-w-screen-lg mx-auto">
+      <div className="grid grid-cols-1 Small-At:grid-cols-2 Medium-At:grid-cols-3 gap-4 pt-0 w-full max-w-screen-lg mx-auto">
         <ContentCard
           image="https://source.unsplash.com/random/800x600"
           title="Cartão A"

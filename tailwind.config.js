@@ -15,7 +15,8 @@ export default {
         'roboto': ['Roboto', 'Helvetica', 'Arial', 'sans-serif'],
       },
       screens: {
-        'Small-At': '961px',
+        'Medium-At': '961px',
+        'Small-At': '601px',
       },
     },
   },
