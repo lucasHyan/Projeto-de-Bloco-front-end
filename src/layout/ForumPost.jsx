@@ -1,5 +1,6 @@
 import React from "react";
 import { ForumComment } from "../components/ForumComment";
+import { Form } from "./Form";
 
 export function ForumPost({
   title = "Placeholder Title",
@@ -40,11 +41,14 @@ export function ForumPost({
         content="Ótimo conteúdo! Parabéns pelo trabalho."
         src={"https://source.unsplash.com/random/700x600"}
       />
-      <ForumComment
-        author="Ana Luiza"
-        date="2024-03-29"
-        content="Gostei muito da abordagem. Fiquei inspirada para pesquisar mais sobre o assunto."
-      />
+      <div className="border-b border-black">
+  <ForumComment
+    author="Ana Luiza"
+    date="2024-03-29"
+    content="Gostei muito da abordagem. Fiquei inspirada para pesquisar mais sobre o assunto."
+  />
+</div>
+      <Form />
       <button
         className="ml-auto px-4 py-2 border bg-main-color hover:bg-dark-color focus:border-main-color focus:outline-none m-1 text-xs font-medium leading-7 rounded-md cursor-pointer shadow-md min-w-16 tracking-widest uppercase"
         onClick={onClick}
