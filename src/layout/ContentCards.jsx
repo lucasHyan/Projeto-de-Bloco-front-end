@@ -4,7 +4,7 @@ import ContentCard from "../components/ContentCard";
 
 export function ContentCards({ onClick }) {
   return (
-    <div className="w-screen bg-secondary">
+    <div className="w-full overflow-hidden bg-secondary">
       <div className="w-full max-w-screen-lg mx-auto">
         <AboutText />
         <div className="grid grid-cols-1 Small-At:grid-cols-2 Medium-At:grid-cols-3 gap-4 pt-0 w-full max-w-screen-lg mx-auto">
