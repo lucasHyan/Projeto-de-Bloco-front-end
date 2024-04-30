@@ -1,5 +1,4 @@
 import React from "react";
-import { ForumComment } from "../components/ForumComment";
 import { Form } from "./Form";
 
 export function ForumPost({
@@ -9,6 +8,7 @@ export function ForumPost({
   date = "Placeholder Date",
   photo = "Placeholder Photo URL",
   onClick,
+  children,
 }) {
   return (
     <div className="bg-secondary p-4">
@@ -30,25 +30,7 @@ export function ForumPost({
             <p className="text-gray-700 text-left">{content}</p>
           </div>
         </div>
-        <ForumComment
-          author="Alberto Souza"
-          date="2022-01-01"
-          content="muito legal o post espero ver mais sobre esse assunto."
-          src={"https://source.unsplash.com/random/501x500"}
-        />
-        <ForumComment
-          author="Maria Silva"
-          date="2023-05-12"
-          content="Ótimo conteúdo! Parabéns pelo trabalho."
-          src={"https://source.unsplash.com/random/700x600"}
-        />
-        <div className="border-b border-black">
-          <ForumComment
-            author="Ana Luiza"
-            date="2024-03-29"
-            content="Gostei muito da abordagem. Fiquei inspirada para pesquisar mais sobre o assunto."
-          />
-        </div>
+        {children}
         <Form />
         <button
           className="ml-auto px-4 py-2  bg-primary hover:bg-highlight focus:border-primary focus:outline-none m-1 text-xs font-medium leading-7 rounded-md cursor-pointer shadow-md min-w-16 tracking-widest uppercase"
