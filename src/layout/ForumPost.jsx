@@ -1,6 +1,5 @@
 import { FaFlag, FaArrowLeft } from "react-icons/fa";
-import { ForumComment } from "../components/ForumComment";
-import { IconButton } from "../components/IconButton";
+import { useNavigate } from "react-router-dom";
 
 export function ForumPost({
   title = "Placeholder Title",
@@ -11,6 +10,8 @@ export function ForumPost({
   onClick,
   children,
 }) {
+  const navigate = useNavigate();
+
   return (
     <div className="bg-secondary p-4">
       <div className="bg-white shadow-lg rounded-lg max-w-[1200px] mx-auto">
@@ -23,7 +24,10 @@ export function ForumPost({
             >
               <FaFlag className="w-6 h-6 mr-2" />
             </button>
-            <button className="text-center text-lg">
+            <button
+              className="text-center text-lg"
+              onClick={() => navigate("/")}
+            >
               <FaArrowLeft className="w-6 h-6" />
             </button>
           </div>

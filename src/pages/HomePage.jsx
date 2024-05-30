@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import { NovosPage } from "./NovosPage";
-import { PostPage } from "../components/PostPage";
 import "../App.css";
 import { AppBar } from "../layout/AppBar/AppBar";
 import { Banner } from "../layout/Banner";
 import { ContentCards } from "../layout/ContentCards";
 import { Footer } from "../layout/Footer";
 import { ForumPost } from "../layout/ForumPost";
-import { ForumComment } from "../components/ForumComment";
-import useRandomUserAndComment from "../hooks/useRandomUserAndComment"; 
+ 
 
 export function HomePage() {
   return (
