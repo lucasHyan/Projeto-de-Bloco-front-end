@@ -1,6 +1,6 @@
-import React from "react";
-import { Form } from "./Form";
-import { FaFlag } from "react-icons/fa";
+import { FaFlag, FaArrowLeft } from "react-icons/fa";
+import { ForumComment } from "../components/ForumComment";
+import { IconButton } from "../components/IconButton";
 
 export function ForumPost({
   title = "Placeholder Title",
@@ -14,10 +14,19 @@ export function ForumPost({
   return (
     <div className="bg-secondary p-4">
       <div className="bg-white shadow-lg rounded-lg max-w-[1200px] mx-auto">
-        <div className="flex items-center">
+        <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold mb-4">{title}</h2>
-          <FaFlag className="ml-2" />
-          <span className="ml-1 text-sm text-gray-500">Denunciar post</span>
+          <div>
+            <button
+              className="text-center text-lg"
+              onClick={() => alert("O post foi denunciado")}
+            >
+              <FaFlag className="w-6 h-6 mr-2" />
+            </button>
+            <button className="text-center text-lg">
+              <FaArrowLeft className="w-6 h-6" />
+            </button>
+          </div>
         </div>
         <div className="flex items-start p-4 bg-gray-300 ">
           <div className="flex flex-col items-center justify-center border-r-2 border-gray-200 pr-4 w-1/5">
