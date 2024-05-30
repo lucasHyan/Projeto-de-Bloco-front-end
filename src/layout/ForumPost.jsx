@@ -1,4 +1,4 @@
-import { FaFlag, FaArrowLeft } from "react-icons/fa";
+import { FaFlag, FaArrowLeft, FaLink } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 export function ForumPost({
@@ -11,6 +11,11 @@ export function ForumPost({
   children,
 }) {
   const navigate = useNavigate();
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(window.location.href);
+    alert("Link copiado para a área de transferência!");
+  };
 
   return (
     <div className="bg-secondary p-4">
@@ -29,6 +34,12 @@ export function ForumPost({
               onClick={() => navigate("/")}
             >
               <FaArrowLeft className="w-6 h-6" />
+            </button>
+            <button
+              className="text-center text-lg"
+              onClick={copyToClipboard}
+            >
+              <FaLink className="w-6 h-6" />
             </button>
           </div>
         </div>
