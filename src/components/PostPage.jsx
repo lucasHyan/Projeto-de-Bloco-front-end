@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import useRandomUserAndComment from '../components/useRandomUserAndComment';
+import useRandomUserAndComment from '../hooks/useRandomUserAndComment';
 import { ForumPost } from "../layout/ForumPost";
 import { ForumComment } from "../components/ForumComment";
 

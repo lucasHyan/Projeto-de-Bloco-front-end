@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import DescriptionFlex from "../components/DescriptionFlex";
-import useRandomUserAndComment from '../components/useRandomUserAndComment';
+import useRandomUserAndComment from '../hooks/useRandomUserAndComment';
 
 export function NovosPage() {
   const { randomUsers, randomComments } = useRandomUserAndComment(4, 4);
