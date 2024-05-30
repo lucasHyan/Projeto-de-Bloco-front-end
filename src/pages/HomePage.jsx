@@ -6,7 +6,7 @@ import { AppBar } from "../layout/AppBar/AppBar";
 import { Banner } from "../layout/Banner";
 import { ContentCards } from "../layout/ContentCards";
 import { Footer } from "../layout/Footer";
-import { ForumPost } from "../layout/ForumPost";
+import { ForumPost } from "../layout/ForumPost/ForumPost";
  
 
 export function HomePage() {
