@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ForumComment } from '../../components/ForumComment';
-import PostHeader from './PostHeader';
-import PostContent from './PostContent';
-import CommentForm from './CommentForm';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { ForumComment } from "../../components/ForumComment";
+import PostHeader from "./PostHeader";
+import PostContent from "./PostContent";
+import CommentForm from "./CommentForm";
 
 export function ForumPost({
   title = "Placeholder Title",
@@ -21,9 +21,8 @@ export function ForumPost({
     alert("Link copiado para a área de transferência!");
   };
 
-  const handleCommentSubmit = (values, { setSubmitting }) => {
-    setComments([...comments, values.message]);
-    setSubmitting(false);
+  const handleCommentSubmit = (values) => {
+    setComments([...comments, values]);
   };
 
   return (
@@ -43,7 +42,13 @@ export function ForumPost({
         />
         {children}
         {comments.map((comment, index) => (
-          <ForumComment key={index} content={comment} />
+          <ForumComment
+            key={index}
+            content={comment.message}
+            date={comment.date}
+            author="Author Name"
+            src="https://source.unsplash.com/random/500x500"
+          />
         ))}
         <CommentForm onSubmit={handleCommentSubmit} />
       </div>
