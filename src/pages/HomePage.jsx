@@ -6,21 +6,14 @@ import { AppBar } from "../layout/AppBar/AppBar";
 import { Banner } from "../layout/Banner";
 import { ContentCards } from "../layout/ContentCards";
 import { Footer } from "../layout/Footer";
-import { ForumPost } from "../layout/ForumPost/ForumPost";
+import { ForumPost } from "./ForumPost";
  
 
 export function HomePage() {
   return (
-    <BrowserRouter>
-      <AppBar />
-      <Routes>
-        <Route path="/" element={<><Banner /><Outlet /></>}>
-          <Route index element={<ContentCards />} />
-          <Route path="post/:id" element={<ForumPost />} />
-          <Route path="novos" element={<NovosPage />} />
-        </Route>
-      </Routes>
-      <Footer />
-    </BrowserRouter>
+    <div>
+      <Banner />
+      <ContentCards />
+    </div>
   );
 }

@@ -24,8 +24,8 @@ function LogosDiv() {
         </IconButton>
       </div>
       <div className="transition-colors duration-150 ease-in-out rounded-full hover:bg-gray-300 hover:bg-opacity-50 w-10 h-10 flex items-center justify-center">
-        <IconButton className="text-center text-lg">
-          <RxHamburgerMenu className="w-6 h-6" />
+        <IconButton to="/CreateAccount" className="text-center text-lg">
+          Criar conta
         </IconButton>
       </div>
     </div>
@@ -41,8 +41,8 @@ function ActionsDiv() {
           <span>Fórum-2000</span>
         </div>
       </IconButton>
-      <IconButton to="#" className="opacity-70 flex Small-At:inline-flex">
-        Trending
+      <IconButton to="/CreateForumPost" className="opacity-70 flex Small-At:inline-flex">
+        Criar Post
       </IconButton>
       <IconButton to="/novos" className="opacity-70 flex Small-At:inline-flex">
         Novos

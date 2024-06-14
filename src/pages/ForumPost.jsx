@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ForumComment } from "../../components/ForumComment";
-import PostHeader from "./PostHeader";
-import PostContent from "./PostContent";
-import CommentForm from "./CommentForm";
+import { ForumComment } from "../components/ForumComment";
+import PostHeader from "../layout/ForumPost/PostHeader";
+import PostContent from "../layout/ForumPost/PostContent";
+import CommentForm from "../layout/ForumPost/CommentForm";
 
 export function ForumPost({
+  user,
   title = "Placeholder Title",
   content = "Placeholder Content",
-  author = "Placeholder Author",
   date = "Placeholder Date",
-  photo = "https://source.unsplash.com/random/600x600",
   children,
 }) {
   const navigate = useNavigate();
@@ -35,8 +34,8 @@ export function ForumPost({
           onCopyLink={copyToClipboard}
         />
         <PostContent
-          photo={photo}
-          author={author}
+          photo={user.profilePicture}
+          author={user.username}
           date={date}
           content={content}
         />
