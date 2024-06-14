@@ -18,10 +18,10 @@ export function NovosPage() {
             return (
               <Link to={`/post/${postId}`} key={postId}>
                 <DescriptionFlex
-                  src={`https://source.unsplash.com/random/800x600?${index}`}
+                  src={post.image} 
                   author={post.author}
                   date={post.date}
-                  content={post.content}
+                  content={post.body} // Alterado de post.content para post.body
                   imageOnRight={index % 2 === 1}
                 />
               </Link>

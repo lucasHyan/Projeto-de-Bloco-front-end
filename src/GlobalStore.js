@@ -3,9 +3,7 @@ import faker from "faker";
 
 const initialState = {
   user: null,
-  get isLoggedIn() {
-    return this.user !== null;
-  },
+  isLoggedIn: false,
   accounts: [],
   comments: [],
   posts: [],
@@ -29,7 +27,7 @@ export const GlobalStore = create((set) => ({
     set((state) => {
       const user = state.accounts.find(account => account.username === username && account.password === password);
       if (user) {
-        return { ...state, user };
+        return { ...state, user, isLoggedIn: true }; 
       } else {
         return state;
       }
