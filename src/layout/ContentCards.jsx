@@ -5,7 +5,7 @@ import ContentCard from "../components/ContentCard";
 import { GlobalStore } from "../GlobalStore";
 
 export function ContentCards() {
-  const posts = GlobalStore((state) => state.posts); 
+  const posts = GlobalStore((state) => state.posts);
 
   return (
     <div className="w-full overflow-hidden bg-secondary">
@@ -15,7 +15,7 @@ export function ContentCards() {
           {posts.map((post, index) => (
             <Link to={`/post/${post.id}`} key={index}>
               <ContentCard
-                image={post.image} 
+                image={post.image}
                 title={post.title}
                 paragraph={post.body}
               />

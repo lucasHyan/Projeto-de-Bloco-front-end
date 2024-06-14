@@ -1,10 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 import DescriptionFlex from "../components/DescriptionFlex";
-import { GlobalStore } from '../GlobalStore';
+import { GlobalStore } from "../GlobalStore";
 
 export function NovosPage() {
-  const posts = GlobalStore(state => state.posts);
+  const posts = GlobalStore((state) => state.posts);
 
   return (
     <div className="w-full h-full bg-[#ff9999] p-32 px-4">
@@ -18,10 +18,10 @@ export function NovosPage() {
             return (
               <Link to={`/post/${postId}`} key={postId}>
                 <DescriptionFlex
-                  src={post.image} 
+                  src={post.image}
                   author={post.author}
                   date={post.date}
-                  content={post.body} // Alterado de post.content para post.body
+                  content={post.body}
                   imageOnRight={index % 2 === 1}
                 />
               </Link>

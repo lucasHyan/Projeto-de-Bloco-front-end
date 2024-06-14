@@ -1,6 +1,6 @@
-import React from 'react';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
+import React from "react";
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
 class Post {
   constructor(username, profilePicture, title, content, date) {
@@ -15,10 +15,10 @@ class Post {
 }
 
 const PostSchema = Yup.object().shape({
-  username: Yup.string().required('Required'),
-  profilePicture: Yup.string().required('Required'),
-  title: Yup.string().required('Required'),
-  content: Yup.string().required('Required'),
+  username: Yup.string().required("Required"),
+  profilePicture: Yup.string().required("Required"),
+  title: Yup.string().required("Required"),
+  content: Yup.string().required("Required"),
 });
 
 export function CreatePost() {
@@ -26,11 +26,22 @@ export function CreatePost() {
     <div>
       <h1>Create a new post</h1>
       <Formik
-        initialValues={{ username: '', profilePicture: '', title: '', content: '' }}
+        initialValues={{
+          username: "",
+          profilePicture: "",
+          title: "",
+          content: "",
+        }}
         validationSchema={PostSchema}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
-            const post = new Post(values.username, values.profilePicture, values.title, values.content, new Date().toISOString());
+            const post = new Post(
+              values.username,
+              values.profilePicture,
+              values.title,
+              values.content,
+              new Date().toISOString()
+            );
             console.log(post);
             setSubmitting(false);
           }, 400);
@@ -40,7 +51,11 @@ export function CreatePost() {
           <Form>
             <Field type="text" name="username" placeholder="Username" />
             <ErrorMessage name="username" component="div" />
-            <Field type="text" name="profilePicture" placeholder="Profile Picture URL" />
+            <Field
+              type="text"
+              name="profilePicture"
+              placeholder="Profile Picture URL"
+            />
             <ErrorMessage name="profilePicture" component="div" />
             <Field type="text" name="title" placeholder="Title" />
             <ErrorMessage name="title" component="div" />

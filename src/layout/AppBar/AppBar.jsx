@@ -1,10 +1,8 @@
 import React from "react";
 import { IconButton } from "../../components/IconButton";
 import { WebSiteLogo } from "../../components/WebSiteLogo";
-import { FaGithub } from "react-icons/fa";
 import { GlobalStore } from "../../GlobalStore";
-import { Link } from 'react-router-dom';
-
+import { Link } from "react-router-dom";
 
 export function AppBar() {
   return (
@@ -16,7 +14,7 @@ export function AppBar() {
 }
 
 function LogosDiv() {
-  const user = GlobalStore((state) => state.user); 
+  const user = GlobalStore((state) => state.user);
 
   return (
     <div className="text-highlight flex items-center p-3 space-x-8">

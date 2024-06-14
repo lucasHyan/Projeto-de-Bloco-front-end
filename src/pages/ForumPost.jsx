@@ -8,11 +8,20 @@ import { GlobalStore } from "../GlobalStore";
 
 const findPostById = (id) => {
   const numId = Number(id);
-  return GlobalStore((state) => state.posts.find((p) => p.id === numId));
+  const post = GlobalStore((state) => state.posts.find((p) => p.id === numId));
+  if (!post) {
+    console.error(`Post with id: ${numId} not found`);
+  } else if (!post.author) {
+    console.error(`Post with id: ${numId} does not have an author`);
+  }
+  return post;
 };
 
 const findUserByUsername = (username) => {
-  return GlobalStore((state) => state.accounts.find((account) => account.username === username));
+  const user = GlobalStore((state) =>
+    state.accounts.find((account) => account.username === username)
+  );
+  return user;
 };
 
 export function ForumPost({ children }) {
@@ -23,6 +32,7 @@ export function ForumPost({ children }) {
   const post = findPostById(id);
   const user = post ? findUserByUsername(post.author) : null;
   const isLoggedIn = GlobalStore((state) => state.isLoggedIn);
+  const loggedInUser = GlobalStore((state) => state.user);
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(window.location.href);
@@ -31,6 +41,12 @@ export function ForumPost({ children }) {
 
   const handleCommentSubmit = (values) => {
     setComments([...comments, values]);
+    // GlobalStore.getState().addCommentToPost(id, {
+    //   message: values.comment,
+    //   date: new Date().toISOString(),
+    //   author: loggedInUser.username,
+    //   image: loggedInUser.image,
+    // });
   };
 
   const renderNotFound = () => <div>Post não encontrado</div>;
@@ -68,8 +84,8 @@ export function ForumPost({ children }) {
             key={index}
             content={comment.message}
             date={comment.date}
-            author="Author Name"
-            src="https://source.unsplash.com/random/500x500"
+            author={loggedInUser.username}
+            src={loggedInUser.image}
           />
         ))}
         {renderCommentForm()}

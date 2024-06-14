@@ -5,7 +5,7 @@ import { GlobalStore } from "../GlobalStore";
 
 export function CreateAccount() {
   const validationSchema = Yup.object().shape({
-    username: Yup.string().required("Nome é obrigatório"), 
+    username: Yup.string().required("Nome é obrigatório"),
     password: Yup.string().required("Senha é obrigatória"),
   });
 
@@ -27,8 +27,8 @@ export function CreateAccount() {
     >
       {({ isSubmitting }) => (
         <Form>
-          <Field type="text" name="username" placeholder="Nome" /> 
-          <ErrorMessage name="username" component="div" /> 
+          <Field type="text" name="username" placeholder="Nome" />
+          <ErrorMessage name="username" component="div" />
           <Field type="password" name="password" placeholder="Senha" />
           <ErrorMessage name="password" component="div" />
           <button type="submit" disabled={isSubmitting}>

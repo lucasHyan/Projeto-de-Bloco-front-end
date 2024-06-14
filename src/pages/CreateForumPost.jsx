@@ -1,27 +1,35 @@
-import React from 'react';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import { GlobalStore } from '../GlobalStore';
+import React from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { GlobalStore } from "../GlobalStore";
+import { useNavigate } from "react-router-dom";
 
 export function CreateForumPost() {
-  const addForumPost = GlobalStore(state => state.addForumPost); 
+  const addForumPost = GlobalStore((state) => state.addForumPost);
+  const getLastPostId = GlobalStore((state) => state.getLastPostId);
+  const user = GlobalStore((state) => state.user);
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
-      title: '',
-      content: '',
+      title: "",
+      content: "",
     },
     validationSchema: Yup.object({
-      title: Yup.string()
-        .required('Required'),
-      content: Yup.string()
-        .required('Required'),
+      title: Yup.string().required("Required"),
+      content: Yup.string().required("Required"),
     }),
     onSubmit: (values, { setSubmitting }) => {
+      const post = {
+        title: values.title,
+        body: values.content,
+        author: user.username,
+      };
+
       setTimeout(() => {
-        alert(JSON.stringify(values, null, 2));
-        addForumPost(values); 
+        addForumPost(post, user.username);
         setSubmitting(false);
+        navigate(`/post/${getLastPostId()}`);
       }, 400);
     },
   });
@@ -36,7 +44,7 @@ export function CreateForumPost() {
         onChange={formik.handleChange}
         value={formik.values.title}
       />
-      {formik.errors.title ? <div>{formik.errors.title}</div> : null}
+      {formik.errors.title && <div>{formik.errors.title}</div>}
 
       <label htmlFor="content">Content</label>
       <textarea
@@ -45,9 +53,9 @@ export function CreateForumPost() {
         onChange={formik.handleChange}
         value={formik.values.content}
       />
-      {formik.errors.content ? <div>{formik.errors.content}</div> : null}
+      {formik.errors.content && <div>{formik.errors.content}</div>}
 
       <button type="submit">Submit</button>
     </form>
   );
-};
+}

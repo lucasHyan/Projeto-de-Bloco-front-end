@@ -1,11 +1,11 @@
-import React from 'react';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import { GlobalStore } from '../GlobalStore';
+import React from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { GlobalStore } from "../GlobalStore";
 
 const validationSchema = Yup.object({
-  username: Yup.string().required('Required'),
-  password: Yup.string().required('Required'),
+  username: Yup.string().required("Required"),
+  password: Yup.string().required("Required"),
 });
 
 export function LoginForm() {
@@ -17,14 +17,14 @@ export function LoginForm() {
 
   const formik = useFormik({
     initialValues: {
-      username: '',
-      password: '',
+      username: "",
+      password: "",
     },
     validationSchema,
     onSubmit: (values) => {
-      console.log('Current accounts:', accounts);
+      console.log("Current accounts:", accounts);
       login(values.username, values.password);
-      console.log('Current user:', user);
+      console.log("Current user:", user);
     },
   });
 
