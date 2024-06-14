@@ -2,9 +2,8 @@ import React from "react";
 import { IconButton } from "../../components/IconButton";
 import { WebSiteLogo } from "../../components/WebSiteLogo";
 import { FaGithub } from "react-icons/fa";
-import { RxHamburgerMenu } from "react-icons/rx";
-import { ScrollButton } from "../../components/ScrollButton";
-import { Link } from "react-router-dom";
+import { GlobalStore } from "../../GlobalStore";
+
 
 export function AppBar() {
   return (
@@ -16,6 +15,8 @@ export function AppBar() {
 }
 
 function LogosDiv() {
+  const user = GlobalStore(state => state.user); 
+
   return (
     <div className="text-highlight flex items-center p-3 space-x-3">
       <div className="transition-colors duration-150 ease-in-out rounded-full hover:bg-gray-300 hover:bg-opacity-50 w-10 h-10 flex items-center justify-center">
@@ -24,9 +25,13 @@ function LogosDiv() {
         </IconButton>
       </div>
       <div className="transition-colors duration-150 ease-in-out rounded-full hover:bg-gray-300 hover:bg-opacity-50 w-10 h-10 flex items-center justify-center">
-        <IconButton to="/CreateAccount" className="text-center text-lg">
-          Criar conta
-        </IconButton>
+        {user ? (
+          <span>{user.name}</span> 
+        ) : (
+          <IconButton to="/CreateAccount" className="text-center text-lg">
+            Criar conta
+          </IconButton>
+        )}
       </div>
     </div>
   );

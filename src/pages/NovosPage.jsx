@@ -10,20 +10,24 @@ export function NovosPage() {
     <div className="w-full h-full bg-[#ff9999] p-32 px-4">
       <div className="flex flex-col items-center justify-center mx-auto max-w-[720px]">
         <h2 className="text-5xl mb-4">Descrição do site</h2>
-        {posts.map((post, index) => {
-          const postId = post.id;
-          return (
-            <Link to={`/post/${postId}`} key={postId}>
-              <DescriptionFlex
-                src={`https://source.unsplash.com/random/800x600?${index}`}
-                author={post.author}
-                date={post.date}
-                content={post.content}
-                imageOnRight={index % 2 === 1}
-              />
-            </Link>
-          );
-        })}
+        {posts.length === 0 ? (
+          <p>Nenhum post encontrado.</p>
+        ) : (
+          posts.map((post, index) => {
+            const postId = post.id;
+            return (
+              <Link to={`/post/${postId}`} key={postId}>
+                <DescriptionFlex
+                  src={`https://source.unsplash.com/random/800x600?${index}`}
+                  author={post.author}
+                  date={post.date}
+                  content={post.content}
+                  imageOnRight={index % 2 === 1}
+                />
+              </Link>
+            );
+          })
+        )}
       </div>
     </div>
   );
