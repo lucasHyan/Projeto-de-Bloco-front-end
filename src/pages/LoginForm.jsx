@@ -9,8 +9,10 @@ const validationSchema = Yup.object({
 });
 
 export function LoginForm() {
-  const { login } = GlobalStore((state) => ({
+  const { login, accounts, user } = GlobalStore((state) => ({
     login: state.login,
+    accounts: state.accounts,
+    user: state.user,
   }));
 
   const formik = useFormik({
@@ -20,7 +22,9 @@ export function LoginForm() {
     },
     validationSchema,
     onSubmit: (values) => {
+      console.log('Current accounts:', accounts);
       login(values.username, values.password);
+      console.log('Current user:', user);
     },
   });
 

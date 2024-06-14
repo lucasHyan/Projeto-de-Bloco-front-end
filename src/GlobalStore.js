@@ -23,8 +23,7 @@ export const GlobalStore = create((set) => ({
   addAccount: (account) =>
     set((state) => ({
       ...state,
-      accounts: [...state.accounts, addImageToAccount(account)],
-      user: addImageToAccount(account),
+      accounts: [...state.accounts, addImageToAccount(account)]
     })),
   login: (username, password) => 
     set((state) => {

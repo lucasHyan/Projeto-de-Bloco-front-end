@@ -19,19 +19,19 @@ function LogosDiv() {
   const user = GlobalStore((state) => state.user); 
 
   return (
-  <div className="text-highlight flex items-center p-3 space-x-6">
-    <div className="transition-colors duration-150 ease-in-out rounded-full hover:bg-gray-300 hover:bg-opacity-50 w-30 h-10 flex items-center justify-center space-x-4">
-      <Link to="/CreateAccount" className="text-center text-lg">
-        Criar conta
-      </Link>
-    </div>
-    <div className="transition-colors duration-150 ease-in-out rounded-full hover:bg-gray-300 hover:bg-opacity-50 w-30 h-10 flex items-center justify-center space-x-4">
-      <Link to="/LoginForm" className="text-center text-lg">
-        Login
-      </Link>
+    <div className="text-highlight flex items-center p-3 space-x-6">
+      <div className="transition-colors duration-150 ease-in-out rounded-full hover:bg-gray-300 hover:bg-opacity-50 w-30 h-10 flex items-center justify-center space-x-4">
+        <Link to="/CreateAccount" className="text-center text-lg">
+          Criar conta
+        </Link>
       </div>
-  </div>
-);
+      <div className="transition-colors duration-150 ease-in-out rounded-full hover:bg-gray-300 hover:bg-opacity-50 w-30 h-10 flex items-center justify-center space-x-4">
+        <Link to="/LoginForm" className="text-center text-lg">
+          {user ? user.username : "Login"}
+        </Link>
+      </div>
+    </div>
+  );
 }
 
 function ActionsDiv() {
