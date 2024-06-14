@@ -13,7 +13,7 @@ export function ContentCards() {
         <AboutText />
         <div className="grid grid-cols-1 Small-At:grid-cols-2 Medium-At:grid-cols-3 gap-4 pt-0 w-full max-w-screen-lg mx-auto">
           {posts.map((post, index) => (
-            <Link to={`/post/${post.title}`} key={index}>
+            <Link to={`/post/${post.id}`} key={index}>
               <ContentCard
                 image={post.image} 
                 title={post.title}

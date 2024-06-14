@@ -3,6 +3,7 @@ import { IconButton } from "../../components/IconButton";
 import { WebSiteLogo } from "../../components/WebSiteLogo";
 import { FaGithub } from "react-icons/fa";
 import { GlobalStore } from "../../GlobalStore";
+import { Link } from 'react-router-dom';
 
 
 export function AppBar() {
@@ -15,26 +16,22 @@ export function AppBar() {
 }
 
 function LogosDiv() {
-  const user = GlobalStore(state => state.user); 
+  const user = GlobalStore((state) => state.user); 
 
   return (
-    <div className="text-highlight flex items-center p-3 space-x-3">
-      <div className="transition-colors duration-150 ease-in-out rounded-full hover:bg-gray-300 hover:bg-opacity-50 w-10 h-10 flex items-center justify-center">
-        <IconButton className="text-center text-lg">
-          <FaGithub className="w-6 h-6" />
-        </IconButton>
-      </div>
-      <div className="transition-colors duration-150 ease-in-out rounded-full hover:bg-gray-300 hover:bg-opacity-50 w-10 h-10 flex items-center justify-center">
-        {user ? (
-          <span>{user.name}</span> 
-        ) : (
-          <IconButton to="/CreateAccount" className="text-center text-lg">
-            Criar conta
-          </IconButton>
-        )}
-      </div>
+  <div className="text-highlight flex items-center p-3 space-x-6">
+    <div className="transition-colors duration-150 ease-in-out rounded-full hover:bg-gray-300 hover:bg-opacity-50 w-30 h-10 flex items-center justify-center space-x-4">
+      <Link to="/CreateAccount" className="text-center text-lg">
+        Criar conta
+      </Link>
     </div>
-  );
+    <div className="transition-colors duration-150 ease-in-out rounded-full hover:bg-gray-300 hover:bg-opacity-50 w-30 h-10 flex items-center justify-center space-x-4">
+      <Link to="/LoginForm" className="text-center text-lg">
+        Login
+      </Link>
+      </div>
+  </div>
+);
 }
 
 function ActionsDiv() {
@@ -46,7 +43,10 @@ function ActionsDiv() {
           <span>Fórum-2000</span>
         </div>
       </IconButton>
-      <IconButton to="/CreateForumPost" className="opacity-70 flex Small-At:inline-flex">
+      <IconButton
+        to="/CreateForumPost"
+        className="opacity-70 flex Small-At:inline-flex"
+      >
         Criar Post
       </IconButton>
       <IconButton to="/novos" className="opacity-70 flex Small-At:inline-flex">

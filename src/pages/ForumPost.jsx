@@ -1,19 +1,28 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ForumComment } from "../components/ForumComment";
 import PostHeader from "../layout/ForumPost/PostHeader";
 import PostContent from "../layout/ForumPost/PostContent";
 import CommentForm from "../layout/ForumPost/CommentForm";
+import { GlobalStore } from "../GlobalStore";
 
-export function ForumPost({
-  user,
-  title = "Placeholder Title",
-  content = "Placeholder Content",
-  date = "Placeholder Date",
-  children,
-}) {
+const findPostById = (id) => {
+  const numId = Number(id);
+  return GlobalStore((state) => state.posts.find((p) => p.id === numId));
+};
+
+const findUserByUsername = (username) => {
+  return GlobalStore((state) => state.accounts.find((account) => account.username === username));
+};
+
+export function ForumPost({ children }) {
   const navigate = useNavigate();
+  const { id } = useParams();
+
   const [comments, setComments] = useState([]);
+  const post = findPostById(id);
+  const user = post ? findUserByUsername(post.author) : null;
+  const isLoggedIn = GlobalStore((state) => state.isLoggedIn);
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(window.location.href);
@@ -24,20 +33,34 @@ export function ForumPost({
     setComments([...comments, values]);
   };
 
+  const renderNotFound = () => <div>Post não encontrado</div>;
+
+  const renderCommentForm = () => {
+    return isLoggedIn ? (
+      <CommentForm onSubmit={handleCommentSubmit} />
+    ) : (
+      <div>Você precisa estar logado para comentar.</div>
+    );
+  };
+
+  if (!post || !user) {
+    return renderNotFound();
+  }
+
   return (
     <div className="bg-secondary p-4">
       <div className="bg-white shadow-lg rounded-lg max-w-[1200px] mx-auto">
         <PostHeader
-          title={title}
+          title={post.title}
           onReport={() => alert("O post foi denunciado")}
           onBack={() => navigate("/")}
           onCopyLink={copyToClipboard}
         />
         <PostContent
-          photo={user.profilePicture}
+          photo={user.image}
           author={user.username}
-          date={date}
-          content={content}
+          date={post.date}
+          content={post.body}
         />
         {children}
         {comments.map((comment, index) => (
@@ -49,7 +72,7 @@ export function ForumPost({
             src="https://source.unsplash.com/random/500x500"
           />
         ))}
-        <CommentForm onSubmit={handleCommentSubmit} />
+        {renderCommentForm()}
       </div>
     </div>
   );

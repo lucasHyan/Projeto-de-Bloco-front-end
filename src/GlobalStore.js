@@ -3,7 +3,9 @@ import faker from "faker";
 
 const initialState = {
   user: null,
-  isLoggedIn: false,
+  get isLoggedIn() {
+    return this.user !== null;
+  },
   accounts: [],
   comments: [],
   posts: [],
@@ -16,15 +18,23 @@ const addImageToAccount = (account) => ({
 
 export const GlobalStore = create((set) => ({
   ...initialState,
-  setUser: (user) => set({ user, isLoggedIn: true }),
+  setUser: (user) => set({ user }),
   logout: () => set({ ...initialState }),
   addAccount: (account) =>
     set((state) => ({
       ...state,
       accounts: [...state.accounts, addImageToAccount(account)],
       user: addImageToAccount(account),
-      isLoggedIn: true,
     })),
+  login: (username, password) => 
+    set((state) => {
+      const user = state.accounts.find(account => account.username === username && account.password === password);
+      if (user) {
+        return { ...state, user };
+      } else {
+        return state;
+      }
+    }),
   addComment: (comment) =>
     set((state) => ({ ...state, comments: [...state.comments, comment] })),
   addForumPost: (post, username) =>
