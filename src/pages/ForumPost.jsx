@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ForumComment } from "../components/ForumComment";
-import PostHeader from "../layout/ForumPost/PostHeader";
-import PostContent from "../layout/ForumPost/PostContent";
-import CommentForm from "../layout/ForumPost/CommentForm";
+import { PostHeader } from "../layout/ForumPost/PostHeader";
+import { PostContent } from "../layout/ForumPost/PostContent";
+import { CommentForm } from "../layout/ForumPost/CommentForm";
 import { GlobalStore } from "../GlobalStore";
 
 const findPostById = (id) => {
@@ -11,8 +11,6 @@ const findPostById = (id) => {
   const post = GlobalStore((state) => state.posts.find((p) => p.id === numId));
   if (!post) {
     console.error(`Post with id: ${numId} not found`);
-  } else if (!post.author) {
-    console.error(`Post with id: ${numId} does not have an author`);
   }
   return post;
 };
@@ -24,7 +22,7 @@ const findUserByUsername = (username) => {
   return user;
 };
 
-export function ForumPost({ children }) {
+export function ForumPost() {
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -41,12 +39,6 @@ export function ForumPost({ children }) {
 
   const handleCommentSubmit = (values) => {
     setComments([...comments, values]);
-    // GlobalStore.getState().addCommentToPost(id, {
-    //   message: values.comment,
-    //   date: new Date().toISOString(),
-    //   author: loggedInUser.username,
-    //   image: loggedInUser.image,
-    // });
   };
 
   const renderNotFound = () => <div>Post não encontrado</div>;
@@ -78,7 +70,6 @@ export function ForumPost({ children }) {
           date={post.date}
           content={post.body}
         />
-        {children}
         {comments.map((comment, index) => (
           <ForumComment
             key={index}

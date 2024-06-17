@@ -4,8 +4,14 @@
 @tailwind utilities;
 
 body {
-  @apply text-sm font-roboto font-normal leading-6 tracking-tighter;
+  @apply text-sm font-roboto font-normal leading-6 tracking-tighter bg-secondary flex flex-col min-h-screen;
 }
 
-main {
+.App{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+Footer{
+  margin-top: auto;
 }

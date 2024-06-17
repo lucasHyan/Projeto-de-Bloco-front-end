@@ -20,7 +20,8 @@ function App() {
   console.log("allAccounts:", allAccounts)
 
   return (
-    <BrowserRouter>
+  <BrowserRouter>
+    <div className="App">
       <AppBar />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -37,8 +38,9 @@ function App() {
         <Route path="*" element={<div>404</div>} />
       </Routes>
       <Footer />
-    </BrowserRouter>
-  );
+    </div>
+  </BrowserRouter>
+);
 }
 
 export default App;
