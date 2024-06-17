@@ -57,7 +57,7 @@ export function ForumPost() {
 
   return (
     <div className="bg-secondary p-4">
-      <div className="bg-white shadow-lg rounded-lg max-w-[1200px] mx-auto">
+      <div className="bg-white shadow-lg rounded-lg border-t border-l border-r  border-black max-w-[1200px] mx-auto">
         <PostHeader
           title={post.title}
           onReport={() => alert("O post foi denunciado")}

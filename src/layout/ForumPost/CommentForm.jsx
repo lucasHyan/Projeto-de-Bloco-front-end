@@ -1,11 +1,19 @@
 import { Formik, Form } from "formik";
 import { Mention, MentionsInput } from "react-mentions";
 import { GlobalStore } from "../../GlobalStore";
+import * as Yup from "yup";
 
 const accounts = GlobalStore.getState().accounts.map((account) => ({
   id: account.username,
   display: account.username,
 }));
+
+const validationSchema = Yup.object().shape({
+  message: Yup.string()
+    .min(5, "O comentário deve ter no mínimo 5 caracteres")
+    .max(500, "O comentário deve ter no máximo 500 caracteres")
+    .required("O campo de comentário é obrigatório"),
+});
 
 export function CommentForm({ onSubmit }) {
   const handleSubmit = (values, { resetForm }) => {
@@ -18,8 +26,12 @@ export function CommentForm({ onSubmit }) {
   };
 
   return (
-    <Formik initialValues={{ message: "" }} onSubmit={handleSubmit}>
-      {({ values, handleChange, handleBlur }) => (
+    <Formik
+      initialValues={{ message: "" }}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+    >
+      {({ values, handleChange, handleBlur, errors, touched }) => (
         <Form
           className="grid grid-rows-1 grid-cols-1 w-full font-roboto gap-1 bg-white shadow-md rounded-lg p-4"
           style={{ gridTemplateAreas: `"message message"` }}
@@ -51,6 +63,7 @@ export function CommentForm({ onSubmit }) {
               )}
             />
           </MentionsInput>
+          {errors.message && touched.message && <div>{errors.message}</div>}
           <button
             type="submit"
             className="ml-auto px-4 py-2 border bg-primary hover:bg-highlight focus:border-primary focus:outline-none m-1 text-xs font-medium leading-7 rounded-md cursor-pointer shadow-md min-w-16 tracking-widest uppercase"
