@@ -15,6 +15,7 @@ export function AppBar() {
 
 function LogosDiv() {
   const user = GlobalStore((state) => state.user);
+  const logout = GlobalStore((state) => state.logout);
 
   return (
     <div className="text-highlight flex items-center p-3 space-x-8">
@@ -30,6 +31,13 @@ function LogosDiv() {
           {user ? user.username : "Login"}
         </Link>
       </div>
+      {user && (
+        <div className="transition-colors duration-150 ease-in-out rounded-full hover:bg-gray-300 hover:bg-opacity-50 w-30 h-10 flex items-center justify-center space-x-4">
+          <button onClick={logout} className="text-center text-lg">
+            Logout
+          </button>
+        </div>
+      )}
     </div>
   );
 }

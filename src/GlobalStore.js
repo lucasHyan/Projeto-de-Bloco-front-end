@@ -17,7 +17,7 @@ const addImageToAccount = (account) => ({
 export const GlobalStore = create((set) => ({
   ...initialState,
   setUser: (user) => set({ user }),
-  logout: () => set({ ...initialState }),
+  logout: () => set({ user: null, isLoggedIn: false }),
   addAccount: (account) =>
     set((state) => ({
       ...state,
@@ -35,20 +35,6 @@ export const GlobalStore = create((set) => ({
         return state;
       }
     }),
-  // addCommentToPost: (postId, comment) =>
-  //   set((state) => {
-  //     const postIndex = state.posts.findIndex((post) => post.id == postId);
-  //     if (postIndex == -1) {
-  //       console.error(`Post with id: ${postId} not found`);
-  //       return state;
-  //     }
-  //     const newPosts = [...state.posts];
-  //     newPosts[postIndex] = {
-  //       ...newPosts[postIndex],
-  //       comments: [...newPosts[postIndex].comments, comment],
-  //     };
-  //     return { ...state, posts: newPosts };
-  //   }),
   addForumPost: (post, username) =>
     set((state) => {
       const id = state.posts.length + 1;

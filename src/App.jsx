@@ -14,8 +14,10 @@ import { GlobalStore } from "./GlobalStore";
 function App() {
   const isLoggedIn = GlobalStore((state) => state.isLoggedIn);
   const user = GlobalStore((state) => state.user);
+  const allAccounts = GlobalStore((state) => state.accounts);
   console.log("User:", user);
   console.log("isLoggedIn:", isLoggedIn);
+  console.log("allAccounts:", allAccounts)
 
   return (
     <BrowserRouter>
