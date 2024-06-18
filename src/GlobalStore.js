@@ -14,7 +14,7 @@ const addImageToAccount = (account) => ({
   image: `https://picsum.photos/seed/${account.username}/200`,
 });
 
-export const GlobalStore = create((set) => ({
+export const GlobalStore = create((set, get) => ({
   ...initialState,
   setUser: (user) => set({ user }),
   logout: () => set({ user: null, isLoggedIn: false }),
@@ -36,20 +36,19 @@ export const GlobalStore = create((set) => ({
       }
     }),
   addForumPost: (post, username) =>
-    set((state) => {
-      const id = state.posts.length + 1;
-      const userImage = state.accounts.find(
-        (account) => account.username == username
-      ).image;
-      const postWithIdAndImage = {
-        ...post,
-        id,
-        image: userImage,
-        comments: [],
-      };
-      return { ...state, posts: [...state.posts, postWithIdAndImage] };
-    }),
-  getLastPostId: () => get((state) => state.posts[state.posts.length - 1].id),
+  set((state) => {
+    const id = state.posts.length + 1;
+    const userImage = state.accounts.find(
+      (account) => account.username == username
+    ).image;
+    const postWithIdAndImage = {
+      ...post,
+      id,
+      image: userImage,
+      comments: [],
+    };
+    return { ...state, posts: [...state.posts, postWithIdAndImage], lastPostId: id };
+  }),
 }));
 
 const NUM_ACCOUNTS_AND_POSTS = 6;

@@ -7,7 +7,7 @@ export function ScrollButton({ targetId, children }) {
     };
 
     return (
-        <button onClick={handleClick} className="uppercase font-bold tracking-tight opacity-70 text-sm hidden Small-At:block">
+        <button onClick={handleClick} className="uppercase font-bold tracking-tight opacity-70 text-sm hidden sm:block">
             {children}
         </button>
     );

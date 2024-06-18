@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 
 export function CreateForumPost() {
   const addForumPost = GlobalStore((state) => state.addForumPost);
-  const getLastPostId = GlobalStore((state) => state.getLastPostId);
   const user = GlobalStore((state) => state.user);
   const navigate = useNavigate();
 
@@ -16,21 +15,31 @@ export function CreateForumPost() {
       content: "",
     },
     validationSchema: Yup.object({
-      title: Yup.string().required("Required"),
-      content: Yup.string().required("Required"),
+      title: Yup.string()
+        .min(5, "Title must be at least 5 characters")
+        .max(100, "Title must be at most 100 characters")
+        .required("Required"),
+      content: Yup.string()
+        .min(10, "Content must be at least 10 characters")
+        .max(1000, "Content must be at most 1000 characters")
+        .required("Required"),
     }),
-    onSubmit: (values, { setSubmitting }) => {
+    onSubmit: async (values, { setSubmitting, setErrors }) => {
       const post = {
         title: values.title,
         body: values.content,
         author: user.username,
       };
 
-      setTimeout(() => {
+      try {
         addForumPost(post, user.username);
         setSubmitting(false);
-        navigate(`/post/${getLastPostId()}`);
-      }, 400);
+        const lastPostId = GlobalStore.getState().lastPostId;
+        navigate(`/post/${lastPostId}`);
+      } catch (error) {
+        setErrors({ submit: "There was an error submitting the post." });
+        console.error(error);
+      }
     },
   });
 
@@ -54,6 +63,8 @@ export function CreateForumPost() {
         value={formik.values.content}
       />
       {formik.errors.content && <div>{formik.errors.content}</div>}
+
+      {formik.errors.submit && <div>{formik.errors.submit}</div>}
 
       <button type="submit">Submit</button>
     </form>

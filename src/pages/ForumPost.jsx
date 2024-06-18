@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ForumComment } from "../components/ForumComment";
+import { ForumComment } from "../layout/ForumPost/ForumComment";
 import { PostHeader } from "../layout/ForumPost/PostHeader";
 import { PostContent } from "../layout/ForumPost/PostContent";
 import { CommentForm } from "../layout/ForumPost/CommentForm";

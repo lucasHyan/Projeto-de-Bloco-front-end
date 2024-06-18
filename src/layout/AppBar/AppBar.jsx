@@ -53,11 +53,11 @@ function ActionsDiv() {
       </IconButton>
       <IconButton
         to="/CreateForumPost"
-        className="opacity-70 flex Small-At:inline-flex"
+        className="opacity-70 flex sm:inline-flex"
       >
         Criar Post
       </IconButton>
-      <IconButton to="/novos" className="opacity-70 flex Small-At:inline-flex">
+      <IconButton to="/novos" className="opacity-70 flex sm:inline-flex">
         Novos
       </IconButton>
     </div>
