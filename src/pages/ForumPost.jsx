@@ -31,6 +31,8 @@ export function ForumPost() {
   const user = post ? findUserByUsername(post.author) : null;
   const isLoggedIn = GlobalStore((state) => state.isLoggedIn);
   const loggedInUser = GlobalStore((state) => state.user);
+  const upvotePost = GlobalStore((state) => state.upvotePost);
+  const downvotePost = GlobalStore((state) => state.downvotePost);
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(window.location.href);
@@ -65,18 +67,22 @@ export function ForumPost() {
           onCopyLink={copyToClipboard}
         />
         <PostContent
-          photo={user.image}
+          src={user.image}
           author={user.username}
           date={post.date}
           content={post.body}
+          id={post.id}
+          points={post.points}
+          onUpvote={upvotePost}
+          onDownvote={downvotePost}
         />
         {comments.map((comment, index) => (
           <ForumComment
             key={index}
             content={comment.message}
             date={comment.date}
-            author={loggedInUser.username}
-            src={loggedInUser.image}
+            author={loggedInUser ? loggedInUser.username : 'Anônimo'}
+            src={loggedInUser ? loggedInUser.image : ''}
           />
         ))}
         {renderCommentForm()}

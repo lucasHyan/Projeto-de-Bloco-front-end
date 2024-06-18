@@ -3,6 +3,13 @@ import { Link } from "react-router-dom";
 import DescriptionFlex from "../components/DescriptionFlex";
 import { GlobalStore } from "../GlobalStore";
 
+function truncateText(text, limit) {
+  if (text.length <= limit) {
+    return text;
+  }
+  return text.slice(0, limit) + "...";
+}
+
 export function NovosPage() {
   const posts = GlobalStore((state) => state.posts);
 
@@ -13,20 +20,23 @@ export function NovosPage() {
         {posts.length === 0 ? (
           <p>Nenhum post encontrado.</p>
         ) : (
-          posts.map((post, index) => {
-            const postId = post.id;
-            return (
-              <Link to={`/post/${postId}`} key={postId}>
-                <DescriptionFlex
-                  src={post.image}
-                  author={post.author}
-                  date={post.date}
-                  content={post.body}
-                  imageOnRight={index % 2 === 1}
-                />
-              </Link>
-            );
-          })
+          posts
+            .slice(0, 10)
+            .reverse()
+            .map((post, index) => {
+              const postId = post.id;
+              return (
+                <Link to={`/post/${postId}`} key={postId}>
+                  <DescriptionFlex
+                    src={post.image}
+                    author={post.title}
+                    date={post.date}
+                    content={truncateText(post.body, 100)}
+                    imageOnRight={index % 2 === 1}
+                  />
+                </Link>
+              );
+            })
         )}
       </div>
     </div>

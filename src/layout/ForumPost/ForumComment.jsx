@@ -14,15 +14,18 @@ export function ForumComment({
             className="mr-2 sm:mb-2 rounded-full w-24 h-24 object-cover"
           />
           <div className="flex flex-col items-center">
-            <h2 className="text-xl font-bold mb-0 sm:mb-2">{author}</h2>
+            <h2 className="text-xl font-bold mb-0 sm:mb-2 break-words">{author}</h2>
             <p>likes: ${}</p>
             <div />
           </div>
         </div>
       </div>
       <div className="flex flex-col justify-between pl-4 w-full sm:w-4/5">
-        <hr className="border-1 border-gray-200" />
-        <p className="text-sm text-gray-500">{date}</p>
+        <hr className="border-1 border-gray-200 sm:hidden" />
+        <div className="flex justify-between items-center">
+          <p className="text-sm text-gray-500">{date}</p>
+          <button onClick={() => alert('Botão clicado!')} className="text-sm text-blue-500 hover:text-blue-700">Alerta</button>
+        </div>
         <p className="text-gray-700 text-left break-words">{content}</p>
       </div>
     </div>

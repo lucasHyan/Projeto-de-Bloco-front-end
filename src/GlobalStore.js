@@ -36,19 +36,34 @@ export const GlobalStore = create((set, get) => ({
       }
     }),
   addForumPost: (post, username) =>
-  set((state) => {
-    const id = state.posts.length + 1;
-    const userImage = state.accounts.find(
-      (account) => account.username == username
-    ).image;
-    const postWithIdAndImage = {
-      ...post,
-      id,
-      image: userImage,
-      comments: [],
-    };
-    return { ...state, posts: [...state.posts, postWithIdAndImage], lastPostId: id };
-  }),
+    set((state) => {
+      const id = state.posts.length + 1;
+      const userImage = state.accounts.find(
+        (account) => account.username == username
+      ).image;
+      const postWithIdAndImage = {
+        ...post,
+        id,
+        image: userImage,
+        comments: [],
+        points: 0, 
+      };
+      return { ...state, posts: [...state.posts, postWithIdAndImage], lastPostId: id };
+    }),
+  upvotePost: (postId) =>
+    set((state) => {
+      const posts = state.posts.map((post) =>
+        post.id === postId ? { ...post, points: post.points + 1 } : post
+      );
+      return { ...state, posts };
+    }),
+  downvotePost: (postId) =>
+    set((state) => {
+      const posts = state.posts.map((post) =>
+        post.id === postId ? { ...post, points: post.points - 1 } : post
+      );
+      return { ...state, posts };
+    }),
 }));
 
 const NUM_ACCOUNTS_AND_POSTS = 6;
