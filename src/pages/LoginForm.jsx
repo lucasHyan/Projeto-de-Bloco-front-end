@@ -1,62 +1,68 @@
 import React from "react";
-import { useFormik } from "formik";
+import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { GlobalStore } from "../GlobalStore";
+import { useNavigate } from "react-router-dom";
 
-const validationSchema = Yup.object({
-  username: Yup.string().required("Required"),
-  password: Yup.string().required("Required"),
+const validationSchema = Yup.object().shape({
+  username: Yup.string().required("Obrigatório"),
+  password: Yup.string().required("Obrigatório"),
 });
 
 export function LoginForm() {
-  const { login, accounts, user } = GlobalStore((state) => ({
-    login: state.login,
-    accounts: state.accounts,
-    user: state.user,
-  }));
+  const login = GlobalStore((state) => state.login);
+  const navigate = useNavigate();
 
-  const formik = useFormik({
-    initialValues: {
-      username: "",
-      password: "",
-    },
-    validationSchema,
-    onSubmit: (values) => {
-      console.log("Current accounts:", accounts);
-      login(values.username, values.password);
-      console.log("Current user:", user);
-    },
-  });
+  const handleSubmit = (values, { setSubmitting }) => {
+    login(values.username, values.password);
+    navigate("/");
+    setSubmitting(false);
+  };
 
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <label>
-        Username:
-        <input
-          type="text"
-          name="username"
-          value={formik.values.username}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-        />
-        {formik.touched.username && formik.errors.username ? (
-          <div>{formik.errors.username}</div>
-        ) : null}
-      </label>
-      <label>
-        Password:
-        <input
-          type="password"
-          name="password"
-          value={formik.values.password}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-        />
-        {formik.touched.password && formik.errors.password ? (
-          <div>{formik.errors.password}</div>
-        ) : null}
-      </label>
-      <input type="submit" value="Log in" />
-    </form>
+    <div className="max-w-4xl mx-auto w-full">
+      <h2 className="text-5xl font-roboto leading-tight text-highlight text-center">
+        Login
+      </h2>
+    <Formik
+      initialValues={{ username: "", password: "" }}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+    >
+      {({ isSubmitting }) => (
+        <Form className="flex flex-col">
+          <Field
+            type="text"
+            name="username"
+            placeholder="Nome de usuário"
+            className="w-full px-3 border focus:border-highlight focus:outline-none h-14 my-2"
+          />
+          <ErrorMessage
+            name="username"
+            component="div"
+            className="text-red-500"
+          />
+          <Field
+            type="password"
+            name="password"
+            placeholder="Senha"
+            className="w-full px-3 border focus:border-highlight focus:outline-none h-14 my-2"
+          />
+          <ErrorMessage
+            name="password"
+            component="div"
+            className="text-red-500"
+          />
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="ml-auto px-4 py-2 border bg-highlight hover:bg-dark-color focus:border-primary focus:outline-none m-1 text-xs font-medium leading-7 rounded-md cursor-pointer shadow-md min-w-16 tracking-widest uppercase"
+          >
+            Entrar
+          </button>
+        </Form>
+      )}
+    </Formik>
+    </div>
   );
 }
