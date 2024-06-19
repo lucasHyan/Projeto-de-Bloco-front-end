@@ -18,7 +18,9 @@ const addImageToAccount = (account) => ({
 export const GlobalStore = create((set, get) => ({
   ...initialState,
   setUser: (user) => set({ user }),
+
   logout: () => set({ user: null, isLoggedIn: false }),
+
   addAccount: (account) =>
     set((state) => ({
       ...state,
@@ -27,6 +29,7 @@ export const GlobalStore = create((set, get) => ({
         { ...addImageToAccount(account), points: 0 },
       ],
     })),
+
   login: (username, password) =>
     set((state) => {
       const user = state.accounts.find(
@@ -39,6 +42,7 @@ export const GlobalStore = create((set, get) => ({
         return state;
       }
     }),
+
   addForumPost: (post, username) => {
     set((state) => {
       const id = state.posts.length + 1;
@@ -52,9 +56,7 @@ export const GlobalStore = create((set, get) => ({
         comments: [],
         points: 0,
       };
-
       user.points += 3;
-
       return {
         ...state,
         posts: [...state.posts, postWithIdAndImage],
@@ -62,6 +64,7 @@ export const GlobalStore = create((set, get) => ({
       };
     });
   },
+
   upvotePost: (postId) =>
     set((state) => {
       const posts = state.posts.map((post) =>
@@ -77,6 +80,7 @@ export const GlobalStore = create((set, get) => ({
 
       return { ...state, posts, user };
     }),
+
   downvotePost: (postId) =>
     set((state) => {
       const posts = state.posts.map((post) =>
@@ -84,6 +88,8 @@ export const GlobalStore = create((set, get) => ({
       );
       return { ...state, posts };
     }),
+
+  reset: () => set(() => ({ ...initialState })),
 }));
 
 const NUM_ACCOUNTS_AND_POSTS = 6;

@@ -16,7 +16,7 @@ export function NovosPage() {
   return (
     <div className="w-full h-full bg-[#ff9999] p-32 px-4">
       <div className="flex flex-col items-center justify-center mx-auto max-w-[720px]">
-        <h2 className="text-5xl mb-4">Descrição do site</h2>
+        <h2 className="text-5xl mb-4">Novos Posts</h2>
         {posts.length === 0 ? (
           <p>Nenhum post encontrado.</p>
         ) : (
