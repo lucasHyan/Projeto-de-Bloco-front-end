@@ -63,6 +63,9 @@ function ActionsDiv() {
       <IconButton to="/novos" className="opacity-70 flex sm:inline-flex">
         Novos
       </IconButton>
+      <IconButton to="/TopUsers" className="opacity-70 flex sm:inline-flex">
+        Top Usuários
+      </IconButton>
     </div>
   );
 }

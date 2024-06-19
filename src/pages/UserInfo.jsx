@@ -1,5 +1,6 @@
 import React from 'react';
 import { GlobalStore } from '../GlobalStore';
+import { UserCard } from '../components/UserCard';
 
 export function UserInfo() {
   const user = GlobalStore((state) => state.user);
@@ -9,11 +10,8 @@ export function UserInfo() {
   }
 
   return (
-    <div>
-      <h2>User Information</h2>
-      <p>Username: {user.username}</p>
-      <p>Points: {user.points}</p>
-      <img src={user.image} alt="User" />
+    <div className='max-w-screen-lg mx-auto mt-10'>
+      <UserCard user={user} />
     </div>
   );
 };

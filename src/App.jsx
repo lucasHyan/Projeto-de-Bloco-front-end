@@ -11,6 +11,7 @@ import { ForumPost } from "./pages/ForumPost";
 import { CreateForumPost } from "./pages/CreateForumPost";
 import { GlobalStore } from "./GlobalStore";
 import { UserInfo } from "./pages/UserInfo";
+import { TopUsers } from "./pages/TopUsers";
 
 function App() {
   const isLoggedIn = GlobalStore((state) => state.isLoggedIn);
@@ -37,6 +38,7 @@ function App() {
           <Route path="CreateAccount" element={<CreateAccount />} />
           <Route path="LoginForm" element={<LoginForm />} />
           <Route path="UserInfo" element={<UserInfo />} />
+          <Route path="TopUsers" element={<TopUsers />} />
           <Route path="*" element={<div>404</div>} />
         </Routes>
         <Footer />
