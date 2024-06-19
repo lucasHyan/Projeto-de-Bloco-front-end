@@ -42,8 +42,8 @@ export function ForumPost() {
   };
 
   const handleCommentSubmit = (values) => {
-    GlobalStore.getState().addComment(id, values, loggedInUser.username);
-  };
+  GlobalStore.getState().addComment(id, values, loggedInUser.username);
+};
 
   const renderNotFound = () => <div>Post não encontrado</div>;
 
@@ -83,8 +83,9 @@ export function ForumPost() {
             key={index}
             content={comment.message}
             date={comment.date}
-            author={comment.username}
+            author={comment.username} 
             src={loggedInUser ? loggedInUser.image : ""}
+            likes={user.points}
           />
         ))}
         {renderCommentForm()}

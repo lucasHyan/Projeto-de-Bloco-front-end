@@ -3,6 +3,7 @@ export function ForumComment({
   date = "Placeholder Date",
   content = "Placeholder Content",
   src = "",
+  likes = 0,
 }) {
   return (
     <div className="flex flex-col sm:flex-row items-start p-4 border-t border-black w-full">
@@ -15,7 +16,7 @@ export function ForumComment({
           />
           <div className="flex flex-col items-center">
             <h2 className="text-xl font-bold mb-0 sm:mb-2 break-words">{author}</h2>
-            <p>likes: ${}</p>
+            <p>likes:{likes}</p>
             <div />
           </div>
         </div>
