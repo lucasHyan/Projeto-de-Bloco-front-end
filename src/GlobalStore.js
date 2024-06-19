@@ -24,14 +24,14 @@ export const GlobalStore = create((set, get) => ({
       ...state,
       accounts: [
         ...state.accounts,
-        { ...addImageToAccount(account), points: 0 }, 
+        { ...addImageToAccount(account), points: 0 },
       ],
     })),
   login: (username, password) =>
     set((state) => {
       const user = state.accounts.find(
         (account) =>
-          account.username === username && account.password === password
+          account.username == username && account.password == password
       );
       if (user) {
         return { ...state, user, isLoggedIn: true };
@@ -39,40 +39,48 @@ export const GlobalStore = create((set, get) => ({
         return state;
       }
     }),
-  addForumPost: (post, username) =>
+  addForumPost: (post, username) => {
     set((state) => {
       const id = state.posts.length + 1;
-      const userImage = state.accounts.find(
-        (account) => account.username == username
-      ).image;
+      const user = state.accounts.find(
+        (account) => account.username === username
+      );
       const postWithIdAndImage = {
         ...post,
         id,
-        image: userImage,
+        image: user.image,
         comments: [],
         points: 0,
       };
+
+      user.points += 3;
+
       return {
         ...state,
         posts: [...state.posts, postWithIdAndImage],
         lastPostId: id,
       };
-    }),
+    });
+  },
   upvotePost: (postId) =>
     set((state) => {
       const posts = state.posts.map((post) =>
-        post.id === postId ? { ...post, points: post.points + 1 } : post
+        post.id == postId ? { ...post, points: post.points + 1 } : post
       );
       const user = state.user;
-      if (user) {
-        user.points += 1;
-      }
+      const postAuthor = state.accounts.find(
+        (account) =>
+          account.username == posts.find((post) => post.id == postId).author
+      );
+      user.points += 1;
+      postAuthor.points += 1;
+
       return { ...state, posts, user };
     }),
   downvotePost: (postId) =>
     set((state) => {
       const posts = state.posts.map((post) =>
-        post.id === postId ? { ...post, points: post.points - 1 } : post
+        post.id == postId ? { ...post, points: post.points - 1 } : post
       );
       return { ...state, posts };
     }),

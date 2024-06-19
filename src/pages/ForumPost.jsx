@@ -73,7 +73,7 @@ export function ForumPost() {
           content={post.body}
           id={post.id}
           points={post.points}
-          onUpvote={upvotePost}
+          onUpvote={() => upvotePost(post.id, loggedInUser)}
           onDownvote={downvotePost}
         />
         {comments.map((comment, index) => (
@@ -81,8 +81,8 @@ export function ForumPost() {
             key={index}
             content={comment.message}
             date={comment.date}
-            author={loggedInUser ? loggedInUser.username : 'Anônimo'}
-            src={loggedInUser ? loggedInUser.image : ''}
+            author={loggedInUser ? loggedInUser.username : "Anônimo"}
+            src={loggedInUser ? loggedInUser.image : ""}
           />
         ))}
         {renderCommentForm()}
