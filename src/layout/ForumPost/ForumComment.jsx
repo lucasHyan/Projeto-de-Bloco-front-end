@@ -1,3 +1,5 @@
+import { FaFlag } from "react-icons/fa";
+
 export function ForumComment({
   author = "Placeholder Author",
   date = "Placeholder Date",
@@ -15,7 +17,9 @@ export function ForumComment({
             className="mr-2 sm:mb-2 rounded-full w-24 h-24 object-cover"
           />
           <div className="flex flex-col items-center">
-            <h2 className="text-xl font-bold mb-0 sm:mb-2 break-words">{author}</h2>
+            <h2 className="text-xl font-bold mb-0 sm:mb-2 break-words">
+              {author}
+            </h2>
             <p>likes:{likes}</p>
             <div />
           </div>
@@ -25,7 +29,9 @@ export function ForumComment({
         <hr className="border-1 border-gray-200 sm:hidden" />
         <div className="flex justify-between items-center">
           <p className="text-sm text-gray-500">{date}</p>
-          <button onClick={() => alert('Botão clicado!')} className="text-sm text-blue-500 hover:text-blue-700">Alerta</button>
+          <button onClick={() => alert("Post denunciado")} className="text-lg">
+            <FaFlag />
+          </button>
         </div>
         <p className="text-gray-700 text-left break-words">{content}</p>
       </div>
