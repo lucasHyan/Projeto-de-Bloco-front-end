@@ -26,7 +26,6 @@ export function ForumPost() {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const [comments, setComments] = useState([]);
   const post = findPostById(id);
   const user = post ? findUserByUsername(post.author) : null;
   const isLoggedIn = GlobalStore((state) => state.isLoggedIn);
@@ -34,13 +33,16 @@ export function ForumPost() {
   const upvotePost = GlobalStore((state) => state.upvotePost);
   const downvotePost = GlobalStore((state) => state.downvotePost);
 
+  console.log(
+    "all posts: " + JSON.stringify(GlobalStore.getState().posts, null, 2)
+  );
   const copyToClipboard = () => {
     navigator.clipboard.writeText(window.location.href);
     alert("Link copiado para a área de transferência!");
   };
 
   const handleCommentSubmit = (values) => {
-    setComments([...comments, values]);
+    GlobalStore.getState().addComment(id, values, loggedInUser.username);
   };
 
   const renderNotFound = () => <div>Post não encontrado</div>;
@@ -76,12 +78,12 @@ export function ForumPost() {
           onUpvote={() => upvotePost(post.id, loggedInUser)}
           onDownvote={downvotePost}
         />
-        {comments.map((comment, index) => (
+        {post.comments.map((comment, index) => (
           <ForumComment
             key={index}
             content={comment.message}
             date={comment.date}
-            author={loggedInUser ? loggedInUser.username : "Anônimo"}
+            author={comment.username}
             src={loggedInUser ? loggedInUser.image : ""}
           />
         ))}

@@ -65,6 +65,26 @@ export const GlobalStore = create((set, get) => ({
     });
   },
 
+  addComment: (postId, comment, username) => {
+    set((state) => {
+      const posts = state.posts.map((post) =>
+        post.id == postId
+          ? { ...post, comments: [...post.comments, { ...comment, username }] }
+          : post
+      );
+      const user = state.accounts.find(
+        (account) => account.username == username
+      );
+      const postAuthor = state.accounts.find(
+        (account) =>
+          account.username == posts.find((post) => post.id == postId).author
+      );
+      user.points += 2;
+      postAuthor.points += 2;
+      return { ...state, posts };
+    });
+  },
+
   upvotePost: (postId) =>
     set((state) => {
       const posts = state.posts.map((post) =>
