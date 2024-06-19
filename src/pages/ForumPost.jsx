@@ -76,7 +76,7 @@ export function ForumPost() {
           id={post.id}
           points={post.points}
           onUpvote={() => upvotePost(post.id, loggedInUser)}
-          onDownvote={downvotePost}
+          onDownvote={() => downvotePost(post.id)}
         />
         {post.comments.map((comment, index) => (
           <ForumComment

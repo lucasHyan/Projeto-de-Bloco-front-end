@@ -35,7 +35,7 @@ function LogosDiv() {
         </Link>
       </div>
       {user && (
-        <div className="transition-colors duration-150 ease-in-out rounded-full hover:bg-gray-300 hover:bg-opacity-50 w-30 h-10 flex items-center justify-center space-x-4">
+        <div className="transition-colors duration-150 ease-in-out rounded-full hover:bg-gray-300 hover:bg-opacity-50 w-30 h-10 flex items-center justify-center space-x-4 sm:block hidden">
           <button onClick={logout} className="text-center text-lg">
             Logout
           </button>
@@ -49,21 +49,17 @@ function ActionsDiv() {
   return (
     <div className="text-highlight flex items-center p-3 space-x-8">
       <IconButton to="/">
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center space-x-3 sm:block hidden">
           <WebSiteLogo />
-          <span>Fórum-2000</span>
         </div>
       </IconButton>
-      <IconButton
-        to="/CreateForumPost"
-        className="opacity-70 flex sm:inline-flex"
-      >
+      <IconButton to="/CreateForumPost" className="opacity-70 flex">
         Criar Post
       </IconButton>
-      <IconButton to="/novos" className="opacity-70 flex sm:inline-flex">
+      <IconButton to="/novos" className="opacity-70 flex">
         Novos
       </IconButton>
-      <IconButton to="/TopUsers" className="opacity-70 flex sm:inline-flex">
+      <IconButton to="/TopUsers" className="opacity-70 flex">
         Top Usuários
       </IconButton>
     </div>
