@@ -27,7 +27,10 @@ function LogosDiv() {
         </div>
       )}
       <div className="transition-colors duration-150 ease-in-out rounded-full hover:bg-gray-300 hover:bg-opacity-50 w-30 h-10 flex items-center justify-center space-x-4">
-        <Link to="/LoginForm" className="text-center text-lg">
+        <Link
+          to={user ? "/UserInfo" : "/LoginForm"}
+          className="text-center text-lg"
+        >
           {user ? user.username : "Login"}
         </Link>
       </div>

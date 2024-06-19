@@ -7,6 +7,7 @@ const initialState = {
   accounts: [],
   comments: [],
   posts: [],
+  points: 0,
 };
 
 const addImageToAccount = (account) => ({
@@ -21,7 +22,10 @@ export const GlobalStore = create((set, get) => ({
   addAccount: (account) =>
     set((state) => ({
       ...state,
-      accounts: [...state.accounts, addImageToAccount(account)],
+      accounts: [
+        ...state.accounts,
+        { ...addImageToAccount(account), points: 0 }, 
+      ],
     })),
   login: (username, password) =>
     set((state) => {
@@ -46,16 +50,24 @@ export const GlobalStore = create((set, get) => ({
         id,
         image: userImage,
         comments: [],
-        points: 0, 
+        points: 0,
       };
-      return { ...state, posts: [...state.posts, postWithIdAndImage], lastPostId: id };
+      return {
+        ...state,
+        posts: [...state.posts, postWithIdAndImage],
+        lastPostId: id,
+      };
     }),
   upvotePost: (postId) =>
     set((state) => {
       const posts = state.posts.map((post) =>
         post.id === postId ? { ...post, points: post.points + 1 } : post
       );
-      return { ...state, posts };
+      const user = state.user;
+      if (user) {
+        user.points += 1;
+      }
+      return { ...state, posts, user };
     }),
   downvotePost: (postId) =>
     set((state) => {

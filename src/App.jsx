@@ -10,6 +10,7 @@ import { Footer } from "./layout/Footer";
 import { ForumPost } from "./pages/ForumPost";
 import { CreateForumPost } from "./pages/CreateForumPost";
 import { GlobalStore } from "./GlobalStore";
+import { UserInfo } from "./pages/UserInfo";
 
 function App() {
   const isLoggedIn = GlobalStore((state) => state.isLoggedIn);
@@ -17,30 +18,31 @@ function App() {
   const allAccounts = GlobalStore((state) => state.accounts);
   console.log("User:", user);
   console.log("isLoggedIn:", isLoggedIn);
-  console.log("allAccounts:", allAccounts)
+  console.log("allAccounts:", allAccounts);
 
   return (
-  <BrowserRouter>
-    <div className="App">
-      <AppBar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="post/:id" element={<ForumPost />} />
-        <Route path="novos" element={<NovosPage />} />
-        <Route
-          path="CreateForumPost"
-          element={
-            isLoggedIn ? <CreateForumPost /> : <Navigate to="/LoginForm" />
-          }
-        />
-        <Route path="CreateAccount" element={<CreateAccount />} />
-        <Route path="LoginForm" element={<LoginForm />} />
-        <Route path="*" element={<div>404</div>} />
-      </Routes>
-      <Footer />
-    </div>
-  </BrowserRouter>
-);
+    <BrowserRouter>
+      <div className="App">
+        <AppBar />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="post/:id" element={<ForumPost />} />
+          <Route path="novos" element={<NovosPage />} />
+          <Route
+            path="CreateForumPost"
+            element={
+              isLoggedIn ? <CreateForumPost /> : <Navigate to="/LoginForm" />
+            }
+          />
+          <Route path="CreateAccount" element={<CreateAccount />} />
+          <Route path="LoginForm" element={<LoginForm />} />
+          <Route path="UserInfo" element={<UserInfo />} />
+          <Route path="*" element={<div>404</div>} />
+        </Routes>
+        <Footer />
+      </div>
+    </BrowserRouter>
+  );
 }
 
 export default App;
